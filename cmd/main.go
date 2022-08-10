@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/BinLucky/ItemManagementBackend/handlers"
+	"github.com/BinLucky/ItemManagementBacked/pkg/handlers"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/aws"
