@@ -11,5 +11,6 @@ resp := events.APIGatewayProxyResponse{Headers: map[string]string["Context-Type"
 resp.StatusCode = status
 stringBody,_ := json.Marshal(body)
 resp.Body = string(stringBody)
+return &resp , nil
 
 }
