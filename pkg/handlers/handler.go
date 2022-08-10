@@ -29,12 +29,32 @@ func GetItem(req events.APIGatewayProxyRequest, tableName string, dynaClient dyn
 }
 
 func CreateItem(req events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*events.APIGatewayProxyResponse, error) {
+
+	newItem, err := item.CreateItem(req, tableName, dynaClient)
+	if err != nil {
+		return apiResponse(http.StatusBadRequest, ErrorBody{aws.String(err.Error())})
+	}
+	return apiResponse(http.StatusCreated, newItem)
+
 }
 
 func UpdateItem(req events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*events.APIGatewayProxyResponse, error) {
+
+	updatedItem, err := item.UpdateItem(req, tableName, dynaClient)
+	if err != nil {
+		return apiResponse(http.StatusBadRequest, ErrorBody{aws.String(err.Error())})
+	}
+	return apiResponse(http.StatusCreated, updatedItem)
 }
 
 func DeleteItem(req events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*events.APIGatewayProxyResponse, error) {
+	deletedItem, err := item.DeleteItem(req, tableName, dynaClient)
+
+	if err != nil {
+		return apiResponse(http.StatusBadRequest, ErrorBody{aws.String(err.Error())})
+	}
+	return apiResponse(http.StatusOK, deletedItem)
+
 }
 
 func UnHandledMethod() (*events.APIGatewayProxyResponse, error) {

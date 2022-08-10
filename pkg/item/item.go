@@ -50,11 +50,26 @@ func FetchItem(barcode, tableName string,dynaClient dynamodbiface.DynamoDBAPI )(
 	return resultItem , nil
 }
 
-func FetchItems()(){}
+func FetchItems(tableName string , dynaClient dynamodbiface.DynamoDBAPI )(*[]Item,error){
+input := &dynamodb.ScanInput{
+	TableName: aws.String(tableName),
+}
+resultItems , err := dynaClient.Scan(input)
+err!=nil{
+	return errors.New(ErrorFailedtoFetchRecord)
+}
+resultItems = new([]Item)
+err = dynamodbattribute.UnmarshalMap(resultItems.Items,resultItems)
+
+if err!=nil{
+	return errors.New(ErrorFailedToUnMarshalRecord)
+}
+return resultItems,nil
+}
 
 func CreateItem()(){}
 
 func DeleteItem()(){}
 
-func UpdateItem()(){}
+func UpdateItem(req *events.APIGatewayProxyRequest ,tableName string , dynaClient dynamodbiface.DynamoDBAPI)(*Item,error){}
 
