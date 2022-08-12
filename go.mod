@@ -1,4 +1,4 @@
-module ItemMagementBacked
+module ItemManagementBackend
 
 go 1.18
 

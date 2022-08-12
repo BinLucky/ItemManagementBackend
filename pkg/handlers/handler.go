@@ -1,9 +1,9 @@
 package handlers
 
 import (
+	"ItemManagementBackend/pkg/item"
 	"net/http"
 
-	"github.com/BinLucky/ItemManagement/pkg/item"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface"
@@ -25,10 +25,11 @@ func GetItem(req events.APIGatewayProxyRequest, tableName string, dynaClient dyn
 		}
 		return apiResponse(http.StatusOK, result)
 	}
+	return apiResponse(http.StatusBadRequest, nil)
 
 }
 
-func CreateItem(req events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*events.APIGatewayProxyResponse, error) {
+func CreateItem(req *events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*events.APIGatewayProxyResponse, error) {
 
 	newItem, err := item.CreateItem(req, tableName, dynaClient)
 	if err != nil {
@@ -38,7 +39,7 @@ func CreateItem(req events.APIGatewayProxyRequest, tableName string, dynaClient 
 
 }
 
-func UpdateItem(req events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*events.APIGatewayProxyResponse, error) {
+func UpdateItem(req *events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*events.APIGatewayProxyResponse, error) {
 
 	updatedItem, err := item.UpdateItem(req, tableName, dynaClient)
 	if err != nil {
@@ -47,13 +48,13 @@ func UpdateItem(req events.APIGatewayProxyRequest, tableName string, dynaClient 
 	return apiResponse(http.StatusCreated, updatedItem)
 }
 
-func DeleteItem(req events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*events.APIGatewayProxyResponse, error) {
-	deletedItem, err := item.DeleteItem(req, tableName, dynaClient)
+func DeleteItem(req *events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*events.APIGatewayProxyResponse, error) {
+	err := item.DeleteItem(req, tableName, dynaClient)
 
 	if err != nil {
 		return apiResponse(http.StatusBadRequest, ErrorBody{aws.String(err.Error())})
 	}
-	return apiResponse(http.StatusOK, deletedItem)
+	return apiResponse(http.StatusOK, nil)
 
 }
 
