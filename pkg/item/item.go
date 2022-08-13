@@ -74,7 +74,7 @@ func FetchItems(tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*[]Item
 	return incominItems, nil
 }
 
-func CreateItem(req *events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*Item, error) {
+func CreateItem(req events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*Item, error) {
 	var cItem Item
 
 	if err := json.Unmarshal([]byte(req.Body), &cItem); err != nil {
@@ -110,7 +110,7 @@ func CreateItem(req *events.APIGatewayProxyRequest, tableName string, dynaClient
 
 }
 
-func DeleteItem(req *events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) error {
+func DeleteItem(req events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) error {
 	barcode := req.QueryStringParameters["barcode"]
 	input := &dynamodb.DeleteItemInput{
 		Key: map[string]*dynamodb.AttributeValue{
@@ -128,7 +128,7 @@ func DeleteItem(req *events.APIGatewayProxyRequest, tableName string, dynaClient
 
 }
 
-func UpdateItem(req *events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*Item, error) {
+func UpdateItem(req events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*Item, error) {
 	var uItem Item
 
 	if err := json.Unmarshal([]byte(req.Body), &uItem); err != nil {

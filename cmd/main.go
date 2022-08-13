@@ -3,7 +3,8 @@ package main
 import (
 	"os"
 
-	"github.com/BinLucky/ItemManagementBacked/pkg/handlers"
+	"ItemManagementBackend/pkg/handlers"
+
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/aws"
@@ -29,7 +30,7 @@ func main() {
 
 }
 
-const tableName = "LambdaInGoUser"
+const tableName = "LambdaAwsInGoItemManagement"
 
 func handler(req events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 
@@ -41,9 +42,9 @@ func handler(req events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse
 	case "PUT":
 		return handlers.UpdateItem(req, tableName, dynaClient)
 	case "DELETE":
-		return handlers.Delete(req, tableName, dynaClient)
+		return handlers.DeleteItem(req, tableName, dynaClient)
 	default:
-		return handlers.UnhandledMethod()
+		return handlers.UnHandledMethod()
 	}
 
 }

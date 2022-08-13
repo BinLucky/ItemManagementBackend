@@ -29,7 +29,7 @@ func GetItem(req events.APIGatewayProxyRequest, tableName string, dynaClient dyn
 
 }
 
-func CreateItem(req *events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*events.APIGatewayProxyResponse, error) {
+func CreateItem(req events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*events.APIGatewayProxyResponse, error) {
 
 	newItem, err := item.CreateItem(req, tableName, dynaClient)
 	if err != nil {
@@ -39,7 +39,7 @@ func CreateItem(req *events.APIGatewayProxyRequest, tableName string, dynaClient
 
 }
 
-func UpdateItem(req *events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*events.APIGatewayProxyResponse, error) {
+func UpdateItem(req events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*events.APIGatewayProxyResponse, error) {
 
 	updatedItem, err := item.UpdateItem(req, tableName, dynaClient)
 	if err != nil {
@@ -48,7 +48,7 @@ func UpdateItem(req *events.APIGatewayProxyRequest, tableName string, dynaClient
 	return apiResponse(http.StatusCreated, updatedItem)
 }
 
-func DeleteItem(req *events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*events.APIGatewayProxyResponse, error) {
+func DeleteItem(req events.APIGatewayProxyRequest, tableName string, dynaClient dynamodbiface.DynamoDBAPI) (*events.APIGatewayProxyResponse, error) {
 	err := item.DeleteItem(req, tableName, dynaClient)
 
 	if err != nil {
