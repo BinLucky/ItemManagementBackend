@@ -1,9 +1,9 @@
 package main
 
 import (
-	"ItemManagementBackend/pkg/handlers"
 	"os"
 
+	"github.com/BinLucky/ItemManagementBackend/pkg/handlers"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/aws"

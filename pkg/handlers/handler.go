@@ -1,8 +1,9 @@
 package handlers
 
 import (
-	"ItemManagementBackend/pkg/item"
 	"net/http"
+
+	"github.com/BinLucky/ItemManagementBackend/pkg/item"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go/aws"

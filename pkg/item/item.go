@@ -1,9 +1,10 @@
 package item
 
 import (
-	"ItemManagementBackend/pkg/validators"
 	"encoding/json"
 	"errors"
+
+	"github.com/BinLucky/ItemManagementBackend/pkg/validators"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go/aws"
