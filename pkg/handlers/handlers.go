@@ -11,7 +11,7 @@ import (
 )
 
 type ErrorBody struct {
-	ErrorMsg *string `json:"error,omitempty`
+	ErrorMsg *string `json:"error,omitempty"`
 }
 
 var ErrorMethodNotAllowed = "Method not allowed"
