@@ -26,7 +26,13 @@ func GetItem(req events.APIGatewayProxyRequest, tableName string, dynaClient dyn
 		}
 		return apiResponse(http.StatusOK, result)
 	}
-	return apiResponse(http.StatusBadRequest, nil)
+	result, err := item.FetchItems(tableName, dynaClient)
+
+	if err != nil {
+		return apiResponse(http.StatusBadRequest, ErrorBody{aws.String(err.Error())})
+	}
+
+	return apiResponse(http.StatusOK, result)
 
 }
 
